@@ -1,2 +1,4 @@
-# example_javascript_html_css
-web-page made in html/css/javascript
+code example, made by me to complete one of the MasterD course modules
+
+
+contact : brunodelatorre07@gmail.com
