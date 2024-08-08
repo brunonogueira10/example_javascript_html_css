@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prática Javascript</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/1c3789949c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header id="navbar">
+        <nav>
+            <ul>
+                <li><a href="#main-content">Home</a></li>
+                <li><a href="#central-content">Sobre</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#quote">Orçamento</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="container">
+        <aside id="sidebar">
+            <h2>RSS News</h2>
+            <ul id="rss-feed"></ul>
+        </aside>
+        <main id="main-content">
+            <div id="central-content">
+                <h1>Bem-Vindo ao Site</h1>
+                <p>Aqui você encontrará mais informações acerca de nós... Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Sed, quasi. Officia minus cum hic id corporis vitae doloremque nobis, tempora
+                    dignissimos sequi maiores expedita odit! Facere sunt incidunt consectetur commodi. Lorem ipsum dolor
+                    sit amet consectetur adipisicing elit. Recusandae, voluptatem assumenda repellendus blanditiis
+                    perspiciatis adipisci modi atque. Vitae adipisci omnis alias aut nisi consequatur modi quam
+                    quibusdam suscipit, culpa magni?</p>
+                <div id="content-area"></div>
+            </div>
+            <div id="portfolio">
+                <h2><strong>Portfólio:</strong></h2>
+                <div class="gallery">
+                    <img src="images/image1.jpg" alt="Project 1"
+                        onclick="openModal('images/image1.jpg', 'Fundo 1', 'Descrição do projeto 1')">
+                    <img src="images/image2.jpg" alt="Project 2"
+                        onclick="openModal('images/image2.jpg', 'Fundo 2', 'Descrição do projeto 2')">
+                    <img src="images/image3.jpg" alt="Project 3"
+                        onclick="openModal('images/image3.jpg', 'Fundo 3', 'Descrição do projeto 3')">
+                </div>
+            </div>
+            <div id="quote">
+                <form id="quote-form" oninput="calculateQuote()">
+                    <h2>Orçamento:</h2>
+                    <label for="pageType">Tipo de Página:</label>
+                    <select id="pageType" name="pageType" required>
+                        <option value="" disabled selected hidden>Escolha uma opção</option>
+                        <option value="basic">Basico - $500</option>
+                        <option value="advanced">Avançado - $1000</option>
+                        <option value="premium">Premium - $1500</option>
+                        <option value="custom">Personalizado - $2000</option>
+                    </select>
+                    <br>
+                    <label for="deliveryTime">Tempo de entrega em Meses:</label>
+                    <input type="number" id="deliveryTime" name="deliveryTime" min="1" required>
+                    <br>
+                    <label>Serviços adicionais:</label>
+                    <br>
+                    <label for="section1">Web-Page</label>
+                    <input type="checkbox" id="section1" name="sections" value="400">
+                    <br>
+                    <label for="section2">Blockchain</label>
+                    <input type="checkbox" id="section2" name="sections" value="700">
+                    <br>
+                    <label for="section3">Inteligência Artificial</label>
+                    <input type="checkbox" id="section3" name="sections" value="800">
+                    <br>
+                    <label for="finalQuote">Preço Final:</label>
+                    <input type="text" id="finalQuote" name="finalQuote" readonly>
+                    <br>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+            <div id="contact">
+                <h2>Entre em contacto:</h2>
+                <div id="map" style="width: 100%; height: 400px;"></div>
+                <div id="company-info">
+                    <p><strong>Empresa :</strong> John Doe Corporation</p>
+                    <p><strong>Address:</strong> 1234 John Street, Porto, Portugal</p>
+                    <p><strong>Phone:</strong> +351 123 456 789</p>
+                    <p><strong>Email:</strong> contact@example.com</p>
+                </div>
+                <form id="contact-form">
+                    <h3>Deixe o seu Contacto:</h3>
+                    <label for="firstName">Primeiro Nome:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <br>
+                    <label for="lastName">Ultimo Nome:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <br>
+                    <label for="phone">Telemóvel:</label>
+                    <input type="tel" id="phone" name="phone" required pattern="+[0-9]{3}[0-9]{9}"
+                        placeholder="+351123456789">
+                    <br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="johndoe@gmail.com">
+                    <br>
+                    <label for="meetingDate">Data de nascimento:</label>
+                    <input type="date" id="meetingDate" name="meetingDate" required>
+                    <br>
+                    <label for="reason">Razão do contacto:</label>
+                    <textarea id="reason" name="reason" required
+                        placeholder="Eu quero entrar em contacto porque..."></textarea>
+                    <br>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <div id="modal" class="modal" aria-hidden="true" tabindex="-1">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modal-image" alt="" src="/images/">
+        <div id="caption"></div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Exemplo empresa</p>
+        <a class="icon_footer" href="https://www.instagram.com/" target="_blank"><i
+                class="fa-brands fa-instagram"></i></a>
+        <a class="icon_footer" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        <a class="icon_footer" href="https://www.facebook.com/" target="_blank"><i
+                class="fa-brands fa-facebook"></i></a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
